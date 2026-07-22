@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OdontoCirúrgica — Loja especializada em produtos cirúrgicos odontológicos: implantes, motores, brocas, kits de sutura e instrumentais com certificação ANVISA.">
+    <meta name="keywords" content="produtos cirúrgicos odontológicos, implantes dentários, motor cirúrgico, brocas titânio, kit sutura, instrumental odontológico">
+    <title>OdontoCirúrgica | Produtos Cirúrgicos Odontológicos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ========== LOADER ========== -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <span class="loader-cross">✦</span>
+                <div class="loader-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+            </div>
+            <p class="loader-text">OdontoCirúrgica</p>
+            <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ========== CURSOR GLOW (desktop) ========== -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <div class="logo-mark">
+                    <span class="logo-cross">✦</span>
+                    <div class="logo-pulse-ring"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">Odonto<span class="logo-accent">Cirúrgica</span></span>
+                    <span class="logo-tagline">Excelência em Cirurgia Dental</span>
+                </div>
+            </a>
+
+            <div class="nav-search" id="nav-search">
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" id="search-input" placeholder="Buscar implantes, motores, brocas..." autocomplete="off">
+                    <kbd class="search-kbd">Ctrl+K</kbd>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="nav-btn theme-btn" id="theme-toggle" aria-label="Alternar tema">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
+                <button class="nav-btn cart-btn" id="cart-toggle" aria-label="Abrir carrinho">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+
+            <button class="nav-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+                <div class="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-mesh"></div>
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="hero-grid-lines"></div>
+            <div class="hero-noise"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge animate-in">
+                <span class="badge-dot"></span>
+                <span>Referência Nacional em Cirurgia Odontológica</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="badge-arrow"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+
+            <h1 class="hero-title animate-in" style="--delay: 0.1s">
+                <span class="title-line">Instrumentais</span>
+                <span class="title-line"><span class="text-shimmer">Cirúrgicos</span> de</span>
+                <span class="title-line">Alta <span class="text-shimmer-alt">Performance</span></span>
+            </h1>
+
+            <p class="hero-subtitle animate-in" style="--delay: 0.2s">
+                Equipamentos e insumos certificados ANVISA para implantodontia, periodontia e cirurgias bucomaxilofaciais. Tecnologia que inspira confiança no bloco cirúrgico.
+            </p>
+
+            <div class="hero-actions animate-in" style="--delay: 0.3s">
+                <a href="#catalogo" class="btn btn-primary btn-glow" id="hero-cta">
+                    <span>Explorar Catálogo</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#categorias" class="btn btn-glass" id="hero-categories">
+                    <span>Ver Categorias</span>
+                </a>
+            </div>
+
+            <div class="hero-metrics animate-in" style="--delay: 0.4s">
+                <div class="metric">
+                    <div class="metric-value"><span class="counter" data-target="2500">0</span>+</div>
+                    <div class="metric-label">Produtos</div>
+                    <div class="metric-bar"><div class="metric-bar-fill" style="--width: 85%"></div></div>
+                </div>
+                <div class="metric-sep"></div>
+                <div class="metric">
+                    <div class="metric-value"><span class="counter" data-target="850">0</span>+</div>
+                    <div class="metric-label">Clínicas Atendidas</div>
+                    <div class="metric-bar"><div class="metric-bar-fill" style="--width: 72%"></div></div>
+                </div>
+                <div class="metric-sep"></div>
+                <div class="metric">
+                    <div class="metric-value"><span class="counter" data-target="15">0</span></div>
+                    <div class="metric-label">Anos no Mercado</div>
+                    <div class="metric-bar"><div class="metric-bar-fill" style="--width: 95%"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator animate-in" style="--delay: 0.6s">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Rolar para baixo</span>
+        </div>
+    </section>
+
+    <!-- ========== MARQUEE TRUST BAR ========== -->
+    <section class="marquee-bar" id="marquee-bar">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span class="marquee-item"><i>◆</i> Certificação ANVISA</span>
+                <span class="marquee-item"><i>◆</i> Frete Grátis acima de R$ 500</span>
+                <span class="marquee-item"><i>◆</i> Até 12x sem Juros</span>
+                <span class="marquee-item"><i>◆</i> Suporte Técnico Especializado</span>
+                <span class="marquee-item"><i>◆</i> Garantia Estendida</span>
+                <span class="marquee-item"><i>◆</i> +2500 Produtos</span>
+                <span class="marquee-item"><i>◆</i> Entrega em Todo Brasil</span>
+                <span class="marquee-item"><i>◆</i> 15 Anos de Experiência</span>
+                <!-- duplicate for seamless loop -->
+                <span class="marquee-item"><i>◆</i> Certificação ANVISA</span>
+                <span class="marquee-item"><i>◆</i> Frete Grátis acima de R$ 500</span>
+                <span class="marquee-item"><i>◆</i> Até 12x sem Juros</span>
+                <span class="marquee-item"><i>◆</i> Suporte Técnico Especializado</span>
+                <span class="marquee-item"><i>◆</i> Garantia Estendida</span>
+                <span class="marquee-item"><i>◆</i> +2500 Produtos</span>
+                <span class="marquee-item"><i>◆</i> Entrega em Todo Brasil</span>
+                <span class="marquee-item"><i>◆</i> 15 Anos de Experiência</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURES ========== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h3>Certificação ANVISA</h3>
+                    <p>Todos os produtos possuem registro ativo na ANVISA, garantindo segurança e procedência certificada.</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </div>
+                    <h3>Entrega Expressa</h3>
+                    <p>Envio para todo o Brasil com rastreamento em tempo real. Frete grátis para compras acima de R$ 500.</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </div>
+                    <h3>Suporte Técnico</h3>
+                    <p>Equipe de cirurgiões-dentistas à disposição para orientação técnica sobre cada produto.</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <div class="feature-icon-wrap">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3>Parcele em até 12x</h3>
+                    <p>Pague no cartão em até 12x sem juros ou ganhe 5% de desconto pagando via PIX.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CATEGORIES ========== -->
+    <section class="categories" id="categorias">
+        <div class="container">
+            <div class="section-header" data-aos>
+                <span class="section-overline">Especialidades</span>
+                <h2 class="section-title">Navegue por <span class="text-shimmer">Categoria</span></h2>
+                <p class="section-desc">Selecione uma especialidade para encontrar exatamente o que sua clínica precisa</p>
+            </div>
+            <div class="category-grid" id="category-grid">
+                <!-- Categories injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CATALOG ========== -->
+    <section class="catalog" id="catalogo">
+        <div class="container">
+            <div class="section-header" data-aos>
+                <span class="section-overline">Catálogo Premium</span>
+                <h2 class="section-title">Produtos <span class="text-shimmer">Cirúrgicos</span></h2>
+                <p class="section-desc">Instrumentais e insumos de alta performance para cirurgias odontológicas</p>
+            </div>
+
+            <div class="catalog-toolbar" id="catalog-toolbar">
+                <div class="toolbar-left">
+                    <div class="active-filter" id="active-filter" style="display:none;">
+                        <span id="filter-label">Categoria</span>
+                        <button id="clear-filter" aria-label="Limpar filtro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="results-count" id="results-count">Exibindo 0 produtos</div>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products injected by JS -->
+            </div>
+
+            <div class="no-results" id="no-results" style="display:none;">
+                <div class="no-results-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </div>
+                <h3>Nenhum produto encontrado</h3>
+                <p>Tente buscar por outro termo ou limpe os filtros</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos>
+                <span class="section-overline">Depoimentos</span>
+                <h2 class="section-title">O que nossos <span class="text-shimmer">Clientes</span> dizem</h2>
+            </div>
+            <div class="testimonials-grid" id="testimonials-grid">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NEWSLETTER ========== -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-card" data-aos>
+                <div class="newsletter-bg">
+                    <div class="nl-orb nl-orb-1"></div>
+                    <div class="nl-orb nl-orb-2"></div>
+                </div>
+                <div class="newsletter-content">
+                    <span class="section-overline">Newsletter</span>
+                    <h2>Receba ofertas <span class="text-shimmer">exclusivas</span></h2>
+                    <p>Cadastre-se e ganhe <strong>10% OFF</strong> na sua primeira compra + acesso antecipado a lançamentos.</p>
+                    <form class="nl-form" id="nl-form">
+                        <div class="nl-input-group">
+                            <input type="email" placeholder="seu@email.com.br" required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Cadastrar</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRODUCT DETAIL MODAL ========== -->
+    <div class="modal-overlay" id="product-modal-overlay">
+        <div class="modal product-modal" id="product-modal">
+            <button class="modal-close" id="modal-close-product" aria-label="Fechar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="modal-body" id="product-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- ========== CART SIDEBAR ========== -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Meu Carrinho
+            </h2>
+            <button class="modal-close" id="cart-close" aria-label="Fechar carrinho">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-empty" id="cart-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <p>Seu carrinho está vazio</p>
+            <span>Adicione produtos para continuar</span>
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span class="cart-total-value" id="cart-total-value">R$ 0,00</span>
+            </div>
+            <div class="cart-frete-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                <span id="cart-frete-msg">Frete grátis acima de R$ 500</span>
+            </div>
+            <button class="btn btn-primary btn-full btn-glow" id="checkout-btn">
+                <span>Finalizar Compra</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ========== CHECKOUT MODAL ========== -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+        <div class="modal checkout-modal" id="checkout-modal">
+            <button class="modal-close" id="modal-close-checkout" aria-label="Fechar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="checkout-body" id="checkout-body">
+                <div class="checkout-steps">
+                    <div class="step active" data-step="1"><span>1</span> Dados</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="2"><span>2</span> Entrega</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="3"><span>3</span> Pagamento</div>
+                </div>
+                <form id="checkout-form">
+                    <div class="form-section">
+                        <h3>Dados Profissionais</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome" placeholder="Dr(a). Nome Completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cro">CRO / CPF</label>
+                                <input type="text" id="cro" placeholder="CRO-SP 12345 ou CPF" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" placeholder="contato@clinica.com.br" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone / WhatsApp</label>
+                                <input type="tel" id="telefone" placeholder="(11) 99999-9999" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Endereço de Entrega</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="endereco">Endereço Completo</label>
+                                <input type="text" id="endereco" placeholder="Rua, nº, complemento" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" placeholder="São Paulo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" placeholder="01001-000" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Forma de Pagamento</h3>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="pix" checked>
+                                <div class="payment-card">
+                                    <div class="payment-icon-circle">◆</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">PIX</span>
+                                        <span class="payment-benefit">5% de desconto</span>
+                                    </div>
+                                    <span class="payment-check">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                                    </span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="cartao">
+                                <div class="payment-card">
+                                    <div class="payment-icon-circle">▭</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Cartão</span>
+                                        <span class="payment-benefit">Até 12x sem juros</span>
+                                    </div>
+                                    <span class="payment-check">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                                    </span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="boleto">
+                                <div class="payment-card">
+                                    <div class="payment-icon-circle">≡</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Boleto</span>
+                                        <span class="payment-benefit">3% de desconto</span>
+                                    </div>
+                                    <span class="payment-check">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                                    </span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="checkout-summary" id="checkout-summary"></div>
+                    <button type="submit" class="btn btn-primary btn-full btn-glow btn-checkout-final">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Confirmar Pedido</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SUCCESS MODAL ========== -->
+    <div class="modal-overlay" id="success-modal-overlay">
+        <div class="modal success-modal" id="success-modal">
+            <div class="success-content">
+                <div class="success-checkmark">
+                    <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="25" fill="none"/><path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+                </div>
+                <h2>Pedido Confirmado!</h2>
+                <p>Seu pedido foi realizado com sucesso. Enviamos os detalhes para o seu e-mail.</p>
+                <div class="success-order-id">Pedido #<span id="order-id">000000</span></div>
+                <button class="btn btn-primary btn-glow" id="success-close">Voltar à Loja</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <div class="logo-mark"><span class="logo-cross">✦</span></div>
+                        <div class="logo-text">
+                            <span class="logo-name">Odonto<span class="logo-accent">Cirúrgica</span></span>
+                            <span class="logo-tagline">Excelência em Cirurgia Dental</span>
+                        </div>
+                    </a>
+                    <p class="footer-about">Referência nacional em equipamentos e insumos cirúrgicos odontológicos com certificação ANVISA. Atendemos clínicas, consultórios e hospitais em todo o Brasil desde 2011.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Trocas e Devoluções</a></li>
+                        <li><a href="#">Rastrear Pedido</a></li>
+                        <li><a href="#">Fale Conosco</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>📞 (11) 3000-4000</li>
+                        <li>📧 contato@odontocirurgica.com.br</li>
+                        <li>🕐 Seg–Sex: 8h às 18h</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 OdontoCirúrgica — Todos os direitos reservados. CNPJ: 12.345.678/0001-00. Produtos sujeitos à disponibilidade.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FAB ========== -->
+    <a href="https://wa.me/5511900004000?text=Olá! Gostaria de mais informações sobre os produtos." class="fab-whatsapp" id="fab-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span class="fab-tooltip">Fale conosco</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button class="back-to-top" id="back-to-top" aria-label="Voltar ao topo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <!-- ========== TOAST ========== -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

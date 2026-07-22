@@ -1,0 +1,10 @@
+# Módulos Node
+node_modules/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
