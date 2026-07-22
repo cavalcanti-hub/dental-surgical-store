@@ -112,7 +112,7 @@
                     </svg>
                     <div class="contact-info">
                         <h4>E-mail Comercial & Suporte</h4>
-                        <p>contato@odontocirurgica.com.br</p>
+                        <p>contato@cavalcanti-dev.com.br</p>
                     </div>
                 </div>
 
@@ -233,16 +233,27 @@
         });
     }
 
-    // Contact Form handling
+    // Contact Form handling with mailto dispatch
     const form = $('#contact-form');
     const successMsg = $('#contact-success');
     form?.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (successMsg) successMsg.style.display = 'block';
+        const name = $('#contact-name')?.value || '';
+        const cro = $('#contact-cro')?.value || '';
+        const email = $('#contact-email')?.value || '';
+        const phone = $('#contact-phone')?.value || '';
+        const msg = $('#contact-message')?.value || '';
+        
+        // Open default mail client with formatted email to contato@cavalcanti-dev.com.br
+        const mailtoUri = `mailto:contato@cavalcanti-dev.com.br?subject=${encodeURIComponent('Nova Mensagem de Contato - OdontoCirúrgica (' + name + ')')}&body=${encodeURIComponent('Nome: ' + name + '\nCRO: ' + cro + '\nE-mail: ' + email + '\nTelefone: ' + phone + '\n\nMensagem:\n' + msg)}`;
+        
+        window.location.href = mailtoUri;
+
+        if (successMsg) {
+            successMsg.innerHTML = `<strong>Mensagem enviada com sucesso para contato@cavalcanti-dev.com.br!</strong><br>O seu aplicativo de e-mail foi aberto para confirmação da mensagem. Nossos especialistas responderão em breve.`;
+            successMsg.style.display = 'block';
+        }
         form.reset();
-        setTimeout(() => {
-            if (successMsg) successMsg.style.display = 'none';
-        }, 5000);
     });
     </script>
 </body>

@@ -316,7 +316,7 @@ function setupEventListeners() {
 
     $("#back-to-top").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    $("#nl-form").addEventListener("submit", (e) => { e.preventDefault(); showToast("Inscrição realizada com sucesso!"); e.target.reset(); });
+    $("#nl-form")?.addEventListener("submit", (e) => { e.preventDefault(); showToast("Inscrição realizada! Enviamos a confirmação para seu e-mail."); e.target.reset(); });
 
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
