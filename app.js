@@ -32,7 +32,6 @@ const testimonials = [
 
 // ==================== STATE ====================
 let cart = JSON.parse(localStorage.getItem("odonto_cart_v3")) || [];
-let wishlist = JSON.parse(localStorage.getItem("odonto_wishlist_v1")) || [];
 let activeCategory = "Todos";
 let searchTerm = "";
 let sortBy = "relevant";
@@ -55,14 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     renderTestimonials();
     updateCartUI();
-    updateWishlistUI();
     setupEventListeners();
 });
 
 // ==================== UTILS ====================
 const formatPrice = (val) => val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const saveCart = () => localStorage.setItem("odonto_cart_v3", JSON.stringify(cart));
-const saveWishlist = () => localStorage.setItem("odonto_wishlist_v1", JSON.stringify(wishlist));
 const normalizeText = (v) => v.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 function showToast(msg) {
@@ -122,21 +119,16 @@ function renderProducts() {
     if (!filtered.length) { $("#products-grid").style.display = "none"; $("#no-results").style.display = "block"; return; }
     $("#products-grid").style.display = "grid"; $("#no-results").style.display = "none";
 
-    $("#products-grid").innerHTML = filtered.map((p, i) => {
-        const isFav = wishlist.includes(p.id);
-        return `
-        <article class="product-card" data-aos style="transition-delay:${i * 0.06}s">
-            <button class="product-wishlist-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${p.id});" aria-label="Favoritar">
-                <svg viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <div class="product-image-box" onclick="openProductModal(${p.id})">
+    $("#products-grid").innerHTML = filtered.map((p, i) => `
+        <article class="product-card" onclick="openProductModal(${p.id})" data-aos style="transition-delay:${i * 0.06}s">
+            <div class="product-image-box">
                 <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy">
                 <div class="product-badges">
                     ${p.discount ? `<span class="badge">-${p.discount}%</span>` : ''}
                     ${p.isNew ? `<span class="badge">Novo</span>` : ''}
                 </div>
             </div>
-            <div class="product-meta" onclick="openProductModal(${p.id})">
+            <div class="product-meta">
                 <div>
                     <span class="product-category">${p.category}</span>
                     <h3 class="product-name">${p.name}</h3>
@@ -144,8 +136,7 @@ function renderProducts() {
                 <div class="product-price">${formatPrice(p.price)}</div>
             </div>
         </article>
-        `;
-    }).join("");
+    `).join("");
     initAOS();
 }
 
@@ -164,44 +155,7 @@ function renderTestimonials() {
     `).join("");
 }
 
-// ==================== WISHLIST ====================
-window.toggleWishlist = (id) => {
-    const p = products.find(x => x.id === id);
-    if (wishlist.includes(id)) {
-        wishlist = wishlist.filter(x => x !== id);
-        showToast(`Removido dos favoritos: ${p.name}`);
-    } else {
-        wishlist.push(id);
-        showToast(`Adicionado aos favoritos: ${p.name}`);
-    }
-    saveWishlist();
-    updateWishlistUI();
-    renderProducts();
-};
 
-function updateWishlistUI() {
-    $("#wishlist-count").textContent = wishlist.length;
-    $("#wishlist-count").classList.toggle("visible", wishlist.length > 0);
-
-    if (!wishlist.length) {
-        $("#wishlist-items").style.display = "none";
-        $("#wishlist-empty").style.display = "flex";
-    } else {
-        $("#wishlist-items").style.display = "flex";
-        $("#wishlist-empty").style.display = "none";
-        const favProducts = products.filter(p => wishlist.includes(p.id));
-        $("#wishlist-items").innerHTML = favProducts.map(p => `
-            <div class="cart-item">
-                <img src="${p.image}" class="cart-item-img" alt="${p.name}">
-                <div class="cart-item-info" style="flex:1">
-                    <h4>${p.name}</h4>
-                    <div style="color:var(--text-secondary);font-size:0.85rem">${formatPrice(p.price)}</div>
-                </div>
-                <button onclick="addToCart(${p.id}); toggleWishlist(${p.id});" class="btn btn-outline" style="padding:6px 12px;font-size:0.75rem">Mover para Carrinho</button>
-            </div>
-        `).join("");
-    }
-}
 
 // ==================== MODALS & SHIPPING ====================
 window.openProductModal = (id) => {
@@ -322,10 +276,7 @@ function setupEventListeners() {
         renderProducts();
     });
 
-    // Wishlist events
-    $("#wishlist-toggle").addEventListener("click", () => { $("#wishlist-sidebar").classList.add("open"); $("#wishlist-overlay").classList.add("open"); document.body.classList.add("locked"); });
-    $("#wishlist-close").addEventListener("click", () => { $("#wishlist-sidebar").classList.remove("open"); closeModal("wishlist-overlay"); });
-    $("#wishlist-overlay").addEventListener("click", () => { $("#wishlist-sidebar").classList.remove("open"); closeModal("wishlist-overlay"); });
+
 
     // Cart events
     $("#cart-toggle").addEventListener("click", () => { $("#cart-sidebar").classList.add("open"); $("#cart-overlay").classList.add("open"); document.body.classList.add("locked"); });
@@ -370,8 +321,8 @@ function setupEventListeners() {
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             closeModal("product-modal-overlay"); closeModal("checkout-modal-overlay"); closeModal("success-modal-overlay");
-            $("#cart-sidebar").classList.remove("open"); $("#wishlist-sidebar").classList.remove("open");
-            closeModal("cart-overlay"); closeModal("wishlist-overlay");
+            $("#cart-sidebar").classList.remove("open");
+            closeModal("cart-overlay");
         }
     });
 

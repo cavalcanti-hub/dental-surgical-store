@@ -46,10 +46,6 @@
             </div>
 
             <div class="nav-actions">
-                <button class="nav-btn" id="wishlist-toggle" aria-label="Favoritos" title="Meus Favoritos">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <span id="wishlist-count" class="cart-count">0</span>
-                </button>
                 <button class="nav-btn theme-btn" id="theme-toggle" aria-label="Alternar Tema" title="Alternar Modo Escuro/Claro">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                 </button>
@@ -303,15 +299,15 @@
                 </div>
                 <div class="footer-links">
                     <h4>Produtos</h4>
-                    <ul><li><a href="#">Implantes</a></li><li><a href="#">Motores Cirúrgicos</a></li><li><a href="#">Biomateriais</a></li><li><a href="#">Instrumentais</a></li><li><a href="#">Suturas</a></li></ul>
+                    <ul><li><a href="index.html#catalogo">Implantes</a></li><li><a href="index.html#catalogo">Motores Cirúrgicos</a></li><li><a href="index.html#catalogo">Biomateriais</a></li><li><a href="index.html#catalogo">Instrumentais</a></li><li><a href="index.html#catalogo">Suturas</a></li></ul>
                 </div>
                 <div class="footer-links">
                     <h4>Empresa</h4>
-                    <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Certificações</a></li><li><a href="#">Blog</a></li><li><a href="#">Carreira</a></li><li><a href="#">Contato</a></li></ul>
+                    <ul><li><a href="sobre.html">Sobre Nós</a></li><li><a href="certificacoes.html">Certificações</a></li><li><a href="blog.html">Blog</a></li><li><a href="contato.html">Contato</a></li></ul>
                 </div>
                 <div class="footer-links">
                     <h4>Suporte</h4>
-                    <ul><li><a href="#">Central de Ajuda</a></li><li><a href="#">Política de Troca</a></li><li><a href="#">Rastrear Pedido</a></li><li><a href="#">Termos de Uso</a></li><li><a href="#">Privacidade</a></li></ul>
+                    <ul><li><a href="contato.html">Central de Ajuda</a></li><li><a href="politica-de-troca.html">Política de Troca</a></li><li><a href="termos.html">Termos de Uso</a></li><li><a href="privacidade.html">Privacidade</a></li></ul>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -337,20 +333,6 @@
             <div id="cart-frete-msg" class="cart-frete-info"></div>
             <button id="checkout-btn" class="btn btn-primary btn-full">Finalizar Pedido</button>
         </div>
-    </aside>
-
-    <!-- WISHLIST SIDEBAR -->
-    <div class="modal-overlay" id="wishlist-overlay"></div>
-    <aside id="wishlist-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h2>Meus Favoritos</h2>
-            <button id="wishlist-close" class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        </div>
-        <div id="wishlist-empty" style="padding: 48px; text-align: center; color: var(--text-muted); flex: 1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:64px; height:64px; margin-bottom:16px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            <p>Nenhum item salvo nos favoritos.</p>
-        </div>
-        <div id="wishlist-items" class="cart-items"></div>
     </aside>
 
     <!-- MODALS -->
