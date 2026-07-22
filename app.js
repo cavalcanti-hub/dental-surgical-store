@@ -1,5 +1,6 @@
 /* ============================================================
-   OdontoCirúrgica — Complete Application Logic
+   OdontoCirúrgica — Complete Bespoke Application Logic
+   With Wishlist, Sorting, FAQ Accordion & Shipping Calc
    ============================================================ */
 
 const products = [
@@ -8,7 +9,9 @@ const products = [
     { id: 3, name: "Kit de Sutura Cirúrgica", category: "Suturas", desc: "Fios absorvíveis e não absorvíveis com instrumentais.", fullDesc: "Kit profissional com 24 fios de sutura em diversas espessuras, porta-agulha Castroviejo e tesoura Goldman-Fox em estojo de aço inox autoclavável.", price: 459.90, oldPrice: 549.90, image: "assets/product_suture.jpg", rating: 4.7, reviews: 176, isNew: false, discount: 16, anvisa: "80104530023", specs: { "Fios": "24 unidades", "Agulha": "3/8 cortante", "Estojo": "Aço Inox" } },
     { id: 4, name: "Enxerto Ósseo Sintético 1g", category: "Biomateriais", desc: "Hidroxiapatita e beta-TCP biocompatível e osteocondutivo.", fullDesc: "Substituto ósseo sintético bifásico composto por Hidroxiapatita (60%) e Beta-Tricálcio Fosfato (40%), com porosidade controlada para neoformação óssea acelerada.", price: 275.00, oldPrice: 330.00, image: "assets/product_biomaterial.jpg", rating: 4.7, reviews: 91, isNew: false, discount: 17, anvisa: "80104530089", specs: { "Composição": "HA 60% + β-TCP 40%", "Volume": "1g", "Porosidade": "60-80%" } },
     { id: 5, name: "Broca Cirúrgica Titânio — Kit 8 Pçs", category: "Brocas", desc: "Kit sequencial de titânio nitretado com irrigação interna.", fullDesc: "Kit sequencial de 8 brocas de titânio nitretado com irrigação interna, compatível com contra-ângulos 20:1. Tratamento de superfície DLC para maior durabilidade.", price: 879.00, oldPrice: 1099.00, image: "assets/product_drills.jpg", rating: 4.6, reviews: 143, isNew: false, discount: 20, anvisa: "80104530034", specs: { "Material": "Titânio Nitretado", "Irrigação": "Interna", "Compatibilidade": "20:1" } },
-    { id: 6, name: "Fórceps Universal Nº 150", category: "Instrumentais", desc: "Aço inox AISI 420 para extração de dentes superiores.", fullDesc: "Fórceps odontológico nº 150 (universal superior) fabricado em aço inox AISI 420 temperado com acabamento satinado anti-reflexo. Ergonomia anatômica para máximo controle.", price: 159.90, oldPrice: 199.90, image: "assets/product_forceps.jpg", rating: 4.7, reviews: 189, isNew: false, discount: 20, anvisa: "80104530128", specs: { "Material": "Aço Inox AISI 420", "Indicação": "Superiores", "Comprimento": "17.5 cm" } }
+    { id: 6, name: "Fórceps Universal Nº 150", category: "Instrumentais", desc: "Aço inox AISI 420 para extração de dentes superiores.", fullDesc: "Fórceps odontológico nº 150 (universal superior) fabricado em aço inox AISI 420 temperado com acabamento satinado anti-reflexo. Ergonomia anatômica para máximo controle.", price: 159.90, oldPrice: 199.90, image: "assets/product_forceps.jpg", rating: 4.7, reviews: 189, isNew: false, discount: 20, anvisa: "80104530128", specs: { "Material": "Aço Inox AISI 420", "Indicação": "Superiores", "Comprimento": "17.5 cm" } },
+    { id: 7, name: "Piezoelétrico Ultrassônico Piezotome", category: "Motores", desc: "Corte ósseo micrométrico seletivo sem lesão de tecidos moles.", fullDesc: "Sistema ultrassônico piezoelétrico de alta precisão para cirurgias ósseas delicadas, levantamento de seio maxilar e osteotomias com preservação de tecidos moles.", price: 8490.00, oldPrice: 9990.00, image: "assets/product_piezo.jpg", rating: 5.0, reviews: 48, isNew: true, discount: 15, anvisa: "80104530190", specs: { "Frequência": "24 - 36 kHz", "Display": "Touchscreen 7\"", "Pontas": "6 Inclusas" } },
+    { id: 8, name: "Foco Cirúrgico LED Dual Lens", category: "Instrumentais", desc: "Iluminação de estéril sem sombras com controle de temperatura de cor.", fullDesc: "Luminária de foco cirúrgico de teto com ópticas duplas de LED de altíssima intensidade (120.000 Lux), índice de reprodução de cor CRI > 96 e regulação de campo iluminado.", price: 6290.00, oldPrice: 7490.00, image: "assets/product_lights.jpg", rating: 4.9, reviews: 62, isNew: true, discount: 16, anvisa: "80104530210", specs: { "Intensidade": "120.000 Lux", "CRI": "> 96", "Vida Útil": "50.000 horas" } }
 ];
 
 const categories = [
@@ -29,8 +32,10 @@ const testimonials = [
 
 // ==================== STATE ====================
 let cart = JSON.parse(localStorage.getItem("odonto_cart_v3")) || [];
+let wishlist = JSON.parse(localStorage.getItem("odonto_wishlist_v1")) || [];
 let activeCategory = "Todos";
 let searchTerm = "";
+let sortBy = "relevant";
 
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
@@ -50,12 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     renderTestimonials();
     updateCartUI();
+    updateWishlistUI();
     setupEventListeners();
 });
 
 // ==================== UTILS ====================
 const formatPrice = (val) => val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const saveCart = () => localStorage.setItem("odonto_cart_v3", JSON.stringify(cart));
+const saveWishlist = () => localStorage.setItem("odonto_wishlist_v1", JSON.stringify(wishlist));
 const normalizeText = (v) => v.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 function showToast(msg) {
@@ -103,6 +110,11 @@ function renderProducts() {
     if (activeCategory !== "Todos") filtered = filtered.filter(p => p.category === activeCategory);
     if (searchTerm) { const q = normalizeText(searchTerm); filtered = filtered.filter(p => normalizeText(`${p.name} ${p.category} ${p.desc}`).includes(q)); }
 
+    // Sorting
+    if (sortBy === "price-asc") filtered.sort((a, b) => a.price - b.price);
+    else if (sortBy === "price-desc") filtered.sort((a, b) => b.price - a.price);
+    else if (sortBy === "rating") filtered.sort((a, b) => b.rating - a.rating);
+
     $("#results-count").textContent = `${filtered.length} ${filtered.length === 1 ? "produto" : "produtos"}`;
     $("#active-filter").style.display = activeCategory === "Todos" ? "none" : "flex";
     $("#filter-label").textContent = activeCategory;
@@ -110,16 +122,21 @@ function renderProducts() {
     if (!filtered.length) { $("#products-grid").style.display = "none"; $("#no-results").style.display = "block"; return; }
     $("#products-grid").style.display = "grid"; $("#no-results").style.display = "none";
 
-    $("#products-grid").innerHTML = filtered.map((p, i) => `
-        <article class="product-card" onclick="openProductModal(${p.id})" data-aos style="transition-delay:${i * 0.08}s">
-            <div class="product-image-box">
+    $("#products-grid").innerHTML = filtered.map((p, i) => {
+        const isFav = wishlist.includes(p.id);
+        return `
+        <article class="product-card" data-aos style="transition-delay:${i * 0.06}s">
+            <button class="product-wishlist-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${p.id});" aria-label="Favoritar">
+                <svg viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+            <div class="product-image-box" onclick="openProductModal(${p.id})">
                 <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy">
                 <div class="product-badges">
                     ${p.discount ? `<span class="badge">-${p.discount}%</span>` : ''}
                     ${p.isNew ? `<span class="badge">Novo</span>` : ''}
                 </div>
             </div>
-            <div class="product-meta">
+            <div class="product-meta" onclick="openProductModal(${p.id})">
                 <div>
                     <span class="product-category">${p.category}</span>
                     <h3 class="product-name">${p.name}</h3>
@@ -127,7 +144,8 @@ function renderProducts() {
                 <div class="product-price">${formatPrice(p.price)}</div>
             </div>
         </article>
-    `).join("");
+        `;
+    }).join("");
     initAOS();
 }
 
@@ -146,7 +164,46 @@ function renderTestimonials() {
     `).join("");
 }
 
-// ==================== MODALS ====================
+// ==================== WISHLIST ====================
+window.toggleWishlist = (id) => {
+    const p = products.find(x => x.id === id);
+    if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(x => x !== id);
+        showToast(`Removido dos favoritos: ${p.name}`);
+    } else {
+        wishlist.push(id);
+        showToast(`Adicionado aos favoritos: ${p.name}`);
+    }
+    saveWishlist();
+    updateWishlistUI();
+    renderProducts();
+};
+
+function updateWishlistUI() {
+    $("#wishlist-count").textContent = wishlist.length;
+    $("#wishlist-count").classList.toggle("visible", wishlist.length > 0);
+
+    if (!wishlist.length) {
+        $("#wishlist-items").style.display = "none";
+        $("#wishlist-empty").style.display = "flex";
+    } else {
+        $("#wishlist-items").style.display = "flex";
+        $("#wishlist-empty").style.display = "none";
+        const favProducts = products.filter(p => wishlist.includes(p.id));
+        $("#wishlist-items").innerHTML = favProducts.map(p => `
+            <div class="cart-item">
+                <img src="${p.image}" class="cart-item-img" alt="${p.name}">
+                <div class="cart-item-info" style="flex:1">
+                    <h4>${p.name}</h4>
+                    <div style="color:var(--text-secondary);font-size:0.85rem">${formatPrice(p.price)}</div>
+                </div>
+                <button onclick="addToCart(${p.id}); toggleWishlist(${p.id});" class="btn btn-outline" style="padding:6px 12px;font-size:0.75rem">Mover para Carrinho</button>
+            </div>
+        `).join("");
+    }
+}
+
+// ==================== MODALS & SHIPPING ====================
 window.openProductModal = (id) => {
     const p = products.find(x => x.id === id);
     if (!p) return;
@@ -159,7 +216,17 @@ window.openProductModal = (id) => {
                 <span style="font-size:0.75rem;color:var(--brand-cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;display:block">${p.category} · ANVISA ${p.anvisa}</span>
                 <h2 class="detail-name">${p.name}</h2>
                 <p class="detail-desc">${p.fullDesc}</p>
-                ${specsHtml ? `<div style="margin-bottom:32px">${specsHtml}</div>` : ''}
+                ${specsHtml ? `<div style="margin-bottom:24px">${specsHtml}</div>` : ''}
+
+                <div class="shipping-calc">
+                    <div class="shipping-calc-title">Simular Frete e Prazo</div>
+                    <div class="shipping-input-group">
+                        <input type="text" id="shipping-cep" placeholder="Digite seu CEP (ex: 01001-000)" maxlength="9">
+                        <button class="btn btn-outline" style="padding:8px 16px;font-size:0.75rem" onclick="calcShipping()">Calcular</button>
+                    </div>
+                    <div id="shipping-result" class="shipping-result">✓ SEDEX Cirúrgico: Grátis (Chega amanhã até 12h)</div>
+                </div>
+
                 ${p.oldPrice ? `<div style="color:var(--text-muted);text-decoration:line-through;font-size:0.9rem;margin-bottom:4px">${formatPrice(p.oldPrice)}</div>` : ''}
                 <div class="detail-price">${formatPrice(p.price)}</div>
                 <div style="color:var(--brand-cyan);font-size:0.85rem;margin-bottom:32px">PIX: ${formatPrice(p.price * 0.95)} (5% off)</div>
@@ -171,6 +238,13 @@ window.openProductModal = (id) => {
     `;
     $("#product-modal-overlay").classList.add("open");
     document.body.classList.add("locked");
+};
+
+window.calcShipping = () => {
+    const input = $("#shipping-cep");
+    if (!input || !input.value.trim()) return;
+    const res = $("#shipping-result");
+    if (res) res.style.display = "block";
 };
 
 window.closeModal = (id) => { $(`#${id}`).classList.remove("open"); document.body.classList.remove("locked"); };
@@ -243,9 +317,30 @@ function setupEventListeners() {
     $("#search-input").addEventListener("input", (e) => { searchTerm = e.target.value.trim(); renderProducts(); });
     $("#clear-filter").addEventListener("click", () => { activeCategory = "Todos"; renderCategories(); renderProducts(); });
 
+    $("#sort-select").addEventListener("change", (e) => {
+        sortBy = e.target.value;
+        renderProducts();
+    });
+
+    // Wishlist events
+    $("#wishlist-toggle").addEventListener("click", () => { $("#wishlist-sidebar").classList.add("open"); $("#wishlist-overlay").classList.add("open"); document.body.classList.add("locked"); });
+    $("#wishlist-close").addEventListener("click", () => { $("#wishlist-sidebar").classList.remove("open"); closeModal("wishlist-overlay"); });
+    $("#wishlist-overlay").addEventListener("click", () => { $("#wishlist-sidebar").classList.remove("open"); closeModal("wishlist-overlay"); });
+
+    // Cart events
     $("#cart-toggle").addEventListener("click", () => { $("#cart-sidebar").classList.add("open"); $("#cart-overlay").classList.add("open"); document.body.classList.add("locked"); });
     $("#cart-close").addEventListener("click", () => { $("#cart-sidebar").classList.remove("open"); closeModal("cart-overlay"); });
     $("#cart-overlay").addEventListener("click", () => { $("#cart-sidebar").classList.remove("open"); closeModal("cart-overlay"); });
+
+    // FAQ Accordion events
+    $$(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+            const item = q.parentElement;
+            const isOpen = item.classList.contains("active");
+            $$(".faq-item").forEach(i => i.classList.remove("active"));
+            if (!isOpen) item.classList.add("active");
+        });
+    });
 
     $("#checkout-btn").addEventListener("click", () => {
         if (!cart.length) return;
@@ -275,7 +370,8 @@ function setupEventListeners() {
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             closeModal("product-modal-overlay"); closeModal("checkout-modal-overlay"); closeModal("success-modal-overlay");
-            $("#cart-sidebar").classList.remove("open"); closeModal("cart-overlay");
+            $("#cart-sidebar").classList.remove("open"); $("#wishlist-sidebar").classList.remove("open");
+            closeModal("cart-overlay"); closeModal("wishlist-overlay");
         }
     });
 
